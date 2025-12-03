@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <sys/queue.h>
 
+#include <rte_common.h>
 #include <rte_memory.h>
 #include <rte_launch.h>
 #include <rte_eal.h>
@@ -16,6 +17,10 @@
 #include <rte_hash.h>
 #include <rte_jhash.h>
 #include <rte_ip4.h>
+
+#ifndef __rte_packed
+#define __rte_packed __attribute__((__packed__))
+#endif
 
 /*
  * 5-tuple key type.
@@ -28,7 +33,7 @@ struct flow_key {
 	uint16_t port_src;	//src port
 	uint16_t port_dst;	//dst port
 	uint8_t proto;		//protocol
-}__rte_packed;
+}__attribute__((__packed__));
 
 static void
 init_test_flow_key(struct flow_key *key)
